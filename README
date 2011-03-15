@@ -6,10 +6,6 @@ Installation Requirements:
 *MySQL DataBase
 
 How to Install:
-The site/ folder includes all the files you need, this should be extracted
-to the main development folder, so if you have localhost/zeitgeist/ it should be this path and not extracted to localhost/zeitgeist/site/
-(although you can extract it however you want).
-
 the only thing you need to do is to change the sites/default/default.settings.php
 file to settings.php, and set the username password and database name according
 to what you have configured
