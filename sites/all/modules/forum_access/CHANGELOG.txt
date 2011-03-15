@@ -1,0 +1,54 @@
+$Id: CHANGELOG.txt,v 1.122 2011/01/15 23:11:56 salvis Exp $
+
+CHANGELOG for Forum Access for Drupal 7
+
+
+forum_access 7.x-1.x-dev:
+
+
+forum_access 7.x-1.x-ALPHA4 (2011-01-16):
+  Bugs fixed:
+    - Implement node and comment edit forms for moderators.
+    - Fix comment links.
+    - Disable 'edit own comments' permission and document this.
+    - Fix the tests to ignore 'edit own comments' but to account for 'edit/delete any/own forum content'.
+    - Reorder the tests to make the more difficult ones come first.
+    - In the test suite, rename the roles and users to more accurately reflect the names of the permissions they represent.
+    - #1020852: Fix "Undefined variable: node in forum_access_menu_get_item_alter() line 341".
+    - #1019572: Add '>=' operator to ACL dependency.
+
+
+forum_access 7.x-1.x-ALPHA3 (2011-01-08):
+  Bugs fixed:
+    - Major update to fix various bugs and adapt to late changes in the Form API of D7 core.
+    - Remove remaining references to {acl.name}.
+    - Clean up / enable tests.
+    - Port update 6106 to secure upgrade path from D6.
+    - #1016088: Avoid calling reset() on non-variables.
+    - #993056: Remove call-time pass-by-reference typos.
+    - #999556: Adapt to changed signature of hook_menu_view().
+    - #996130: Fix undefined index 'buttons' notice.
+    - Fix tests to install the newly required chain_menu_access.module.
+    - The D6 moderator role is removed during upgrading, no need to remove it in hook_uninstall(), too.
+
+forum_access 7.x-1.x-ALPHA2 (2010-12-11):
+  Enhancement:
+    - Use the Chain Menu Access API.
+  Bugs fixed:
+    - Fix some minor bugs.
+    - Add missing assertFieldEnabled()/assertFieldDisabled() function that haven't made it into core (see #882564).
+    - Remove the need for the hook_menu_get_item_alter() patch.
+    - Some code clean-up, no functional changes.
+    - Fix invalid use of t().
+    - #964762: Fix undefined variable notice for $na_modules.
+
+forum_access 7.x-1.x-ALPHA1 (2010-11-07):
+  Port fixes from 6.x-1.5:
+    - #745002: Fix missing 'delete comment' link for users with the 'administer comments' permission.
+    - #906430: Add a missing preg_match() call.
+    - #810422: Fix public forums not being visible to Anonymous on the overview page, due to missing default records in the {node_access} table.
+    - Always display the 'Update even if unchanged' checkbox, except for new forums/containers.
+    - Fix inability to save Create and View access for roles with the 'administer nodes' permission.
+  Porting to D7:
+    - Initial port of 6.x-1.4, add extensive tests.
+

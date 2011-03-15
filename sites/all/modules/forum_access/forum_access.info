@@ -1,0 +1,23 @@
+name = Forum Access
+description = Allows forums to be set private and to be given moderators.
+dependencies[] = acl (>=1.0-beta2)
+dependencies[] = chain_menu_access
+dependencies[] = forum
+package = Access control
+core = 7.x
+
+
+files[] = forum_access.admin.inc
+files[] = forum_access.install
+files[] = forum_access.module
+files[] = forum_access.node.inc
+files[] = tests/forum_access.test
+configure = admin/structure/forum
+
+
+; Information added by drupal.org packaging script on 2011-01-16
+version = "7.x-1.0-alpha4"
+core = "7.x"
+project = "forum_access"
+datestamp = "1295142705"
+

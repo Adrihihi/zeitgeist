@@ -1,0 +1,29 @@
+This is the readme file of The Zeitgeist Movement Website project.
+
+
+Installation Requirements:
+*PHP
+*MySQL DataBase
+
+How to Install:
+The site/ folder includes all the files you need, this should be extracted
+to the main development folder, so if you have localhost/zeitgeist/ it should be this path and not extracted to localhost/zeitgeist/site/
+(although you can extract it however you want).
+
+the only thing you need to do is to change the sites/default/default.settings.php
+file to settings.php, and set the username password and database name according
+to what you have configured
+
+the Database itself is in the db/ folder
+(this is in because some modules require adding tables/data..)
+
+When committing to the DB please pay attention not to make unnecessary
+changes like adding to the users table, or cache table.. use common sense please :)
+The DB is just a simple export from phpMyAdmin to a .zip file, no biggy.
+
+btw, this is just the first way I thought of putting the project 
+into a git repo, if anyone has a better suggestion I'm more than ready
+to listen!
+
+
+Good luck.

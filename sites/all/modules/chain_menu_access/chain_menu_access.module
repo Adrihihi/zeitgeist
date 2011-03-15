@@ -1,0 +1,97 @@
+<?php
+// $Id: chain_menu_access.module,v 1.4 2010/12/10 22:47:53 salvis Exp $
+
+/**
+ * @file
+ * An API module to help client modules chain their access callbacks into
+ * other modules' menu items.
+ */
+
+/**
+ * Prepend the given access callback to the chain.
+ *
+ * The client module should call this function from its hook_menu_alter()
+ * implementation to install its access callback.
+ *
+ * NOTE: hook_menu_alter() is called only when the menu router table is
+ * rebuilt after the cache was flushed.
+ *
+ * @param $item
+ *   The menu router item to modify.
+ * @param $new_access_callback
+ *   The name of the client's access callback function, as documented for
+ *   the 'access callback' key in hook_menu().
+ * @param $new_access_arguments
+ *   An array holding the arguments to be passed to the new access callback,
+ *   as documented for the 'access arguments' key in hook_menu().
+ * @param $or_or_pass_index
+ *   Pass FALSE to evaluate ($new_access_callback() && $old_access_callback()).
+ *   Pass TRUE to evaluate ($new_access_callback() || $old_access_callback()).
+ *   Pass a number to evaluate $old_access_callback() first and then pass
+ *   the result as the $pass_index-th argument in $new_access_arguments to
+ *   $new_access_callback().
+ */
+function chain_menu_access_chain(array &$item, $new_access_callback, array $new_access_arguments = array(), $or_or_pass_index = FALSE) {
+  // This works 99.5% of cases. Default tabs probably break but no one goes to
+  // those paths anyways (chx).
+  // Normalize the menu router item.
+  $item += array('access callback' => 'user_access', 'access_arguments' => array());
+  // Prepend a parameter array plus the $new_access_arguments to the existing
+  // access arguments array. This works repeatedly, too.
+  $or = ($or_or_pass_index === TRUE);
+  $pass_index = ($or_or_pass_index === TRUE ? FALSE : $or_or_pass_index);
+  $item['access arguments'] = array_merge(
+    array(array($item['access callback'], $new_access_callback, count($new_access_arguments), $or, $pass_index)),
+    $new_access_arguments,
+    $item['access arguments']
+  );
+  $item['access callback'] = '_chain_menu_access_callback';
+}
+
+/*
+ * Internal helper function to recursively unwrap and call the chained
+ * callbacks, LIFO style.
+ */
+function _chain_menu_access_callback() {
+  $args = func_get_args();
+  // Recover the parameters from the array, plus the $new_access_arguments.
+  list($old_access_callback, $new_access_callback, $count, $or, $pass_index) = array_shift($args);
+  $new_access_arguments = array_splice($args, 0, (int) $count, array());
+  if ($pass_index !== FALSE || $old_access_callback == 'user_access' || is_numeric($old_access_callback)) {
+    // Call the $old_access_callback first either if we need to pass its result
+    // to the $new_access_callback or if it's a user_access() call or constant
+    // number (which would be very quick to evaluate).
+    $old_result = (bool) _chain_menu_access_callback_call($old_access_callback, $args);
+    if ($pass_index !== FALSE) {
+      $new_access_arguments[$pass_index] = $old_result;
+    }
+    elseif ($or == $old_result) {
+      // Do shortcut evaluation on the second operand first!
+      return $or;
+    }
+  }
+  $new_result = _chain_menu_access_callback_call($new_access_callback, $new_access_arguments);
+  // Do normal shortcut evaluation on the first operand (or simply return the
+  // result if we have a $pass_index).
+  if ($pass_index !== FALSE || $or == $new_result) {
+    return $new_result;
+  }
+  // Call $old_access_callback if we haven't called it yet.
+  if (!isset($old_result)) {
+    $old_result = _chain_menu_access_callback_call($old_access_callback, $args);
+  }
+  return $old_result;
+}
+
+/**
+ * Internal helper function to call one callback.
+ */
+function _chain_menu_access_callback_call($access_callback, $access_arguments) {
+  if (is_numeric($access_callback)) {
+    // It's a number (see hook_menu()).
+    return (bool) $access_callback;
+  }
+  if (function_exists($access_callback)) {
+    return call_user_func_array($access_callback, $access_arguments);
+  }
+}

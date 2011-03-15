@@ -1,0 +1,13 @@
+$Id: CHANGELOG.txt,v 1.4 2010/12/11 00:40:54 salvis Exp $
+
+CHANGELOG for Chain Menu Access API for Drupal 7
+
+
+chain_menu_access 7.x-1.x-dev:
+
+
+chain_menu_access 7.x-1.0-BETA1 (2010-12-11):
+  - Merged the $or and $pass_index parameters which were in conflict with each other.
+  - Commented, fixed, and prepared for distribution by salvis.
+  - Generalized and expanded version written by chx during a chat session with salvis.
+  - An API module to help client modules chain their access callbacks into other modules' menu items. Initial version written by chx in 3.5 minutes.
