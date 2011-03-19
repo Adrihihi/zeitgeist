@@ -519,6 +519,10 @@ function field_create_instance($instance) {
  */
 function field_update_instance($instance) {
   // Check that the specified field exists.
+  echo "<pre>"; 
+   var_dump($instance); 
+   echo "</pre>"; 
+   die;
   $field = field_read_field($instance['field_name']);
   if (empty($field)) {
     throw new FieldException(t('Attempt to update an instance of a nonexistent field @field.', array('@field' => $instance['field_name'])));
