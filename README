@@ -10,6 +10,11 @@ the only thing you need to do is to change the sites/default/default.settings.ph
 file to settings.php, and set the username password and database name according
 to what you have configured
 
+Drupal admin user
+User: admin
+password: admin
+
+
 the Database itself is in the db/ folder
 (this is in because some modules require adding tables/data..)
 
