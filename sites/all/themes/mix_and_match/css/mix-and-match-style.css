@@ -110,7 +110,33 @@ a:active {
 .header-group-inner .main-menu-inner .block-outer ul.menu li {
   padding: 8px 15px;
   list-style-image: none;
+  width: 85px;
+  text-align:center;
 }
+
+.header-group-inner .main-menu-inner .block-outer ul.menu li ul {
+    margin-left: -17px;
+    margin-top: 9px;
+}
+.header-group-inner .main-menu-inner .block-outer ul.menu li ul li {
+    background-color:lightBlue;
+	clear:both;
+    margin: 15px 0;
+    width: 117px;
+    border: 0;
+}
+.header-group-inner .main-menu-inner .block-outer ul.menu li ul li a {
+	color:black;
+}
+.header-group-inner .main-menu-inner .block-outer .content > ul.menu > li {
+	height:20px;
+
+}
+
+.blue-accents .main-menu-inner ul li ul li.first {
+  border-left: inherit;
+}
+* 
 
 /* Add border-right: 0; here to remove separator on last menu item */
 .main-menu-inner ul li.first {
