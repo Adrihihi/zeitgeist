@@ -41,6 +41,7 @@
     </tr>
   </thead>
   <tbody>
+  <?php if (isset($forums)): ?>
   <?php foreach ($forums as $child_id => $forum): ?>
     <tr id="forum-list-<?php print $child_id; ?>" class="<?php print $forum->zebra; ?>">
       <td <?php print $forum->is_container ? 'colspan="4" class="container"' : 'class="forum"'; ?>>
@@ -68,5 +69,6 @@
       <?php endif; ?>
     </tr>
   <?php endforeach; ?>
+  <?php endif; ?>
   </tbody>
 </table>

@@ -108,22 +108,29 @@ a:active {
 }
 
 .header-group-inner .main-menu-inner .block-outer ul.menu li {
-  padding: 8px 15px;
+  padding: 8px 0;
   list-style-image: none;
-  width: 85px;
+  width: 105px;
   text-align:center;
 }
 
 .header-group-inner .main-menu-inner .block-outer ul.menu li ul {
-    margin-left: -17px;
+    /*margin-left: -16px;*/
     margin-top: 9px;
+    margin-left: -1px;
 }
 .header-group-inner .main-menu-inner .block-outer ul.menu li ul li {
     background-color:lightBlue;
 	clear:both;
-    margin: 15px 0;
-    width: 117px;
+    width: 105px;
+    margin: 0;
     border: 0;
+    border-color: darkBlue;
+    border-style: none solid;
+    border-width: 0 1px;    
+}
+.blue-accents .main-menu-inner ul li ul li.last {
+	border-bottom: 1px solid darkBlue !important;
 }
 .header-group-inner .main-menu-inner .block-outer ul.menu li ul li a {
 	color:black;

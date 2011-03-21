@@ -16,7 +16,10 @@ password: admin
 
 
 the Database itself is in the db/ folder
-(this is in because some modules require adding tables/data..)
+In order to import it you would have to enable the Backup and Migrate module
+from the Administration Panel, afterwards go to
+Configuration > Backup and Migrate > Restore and choose the
+file inside the db/ folder
 
 It is a dump of the Backup & Migrate module.
 If you have some changes you want to commit, just dump
