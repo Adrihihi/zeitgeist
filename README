@@ -24,6 +24,9 @@ file inside the db/ folder
 It is a dump of the Backup & Migrate module.
 If you have some changes you want to commit, just dump
 with the Backup & Migrate.
+Rename the file db.mysql and replace the original db.mysql file.
+If you know how to check file Differences, try to change as little
+as possible on the db.mysql file (for compatability reasons)
 
 
 btw, this is just the first way I thought of putting the project 
